@@ -502,6 +502,10 @@ func (ec *Client) PendingTransactionCount(ctx context.Context) (uint, error) {
 
 // TODO: SubscribePendingTransactions (needs server side)
 
+func (ec *Client) SubscribePendingTransactions(ctx context.Context, ch chan<- types.Transactions) (ethereum.Subscription, error) {
+	return ec.c.EthSubscribe(ctx, ch, "newPendingTransactions")
+}
+
 // Contract Calling
 
 // CallContract executes a message call transaction, which is directly executed in the VM
